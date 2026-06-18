@@ -20,7 +20,7 @@ The objective was to simulate a real-world SOC analyst environment by performing
 
 ### Architecture Diagram
 
-![SOC Architecture Diagram](screenshots/soc_architecture_diagram.png)
+![SOC Architecture Diagram](screenshots/SOC%20architecture%20diagram.jpeg)
 
 ---
 
@@ -71,7 +71,7 @@ ping 192.168.56.103
 
 ### Screenshot
 
-![Ping Test](screenshots/ping_test.png)
+![Ping Test](screenshots/ping_test.jpeg)
 
 ---
 
@@ -90,7 +90,7 @@ sudo nmap -sV 192.168.56.103
 ### Services Identified
 
 | Port | Service |
-|--------|----------|
+|------|----------|
 | 21 | FTP |
 | 22 | SSH |
 | 23 | Telnet |
@@ -130,7 +130,7 @@ Wireshark
 
 ### Screenshot
 
-![Wireshark Capture](screenshots/wireshark_capture.png)
+![Wireshark Capture](screenshots/wireshark_capture.jpeg)
 
 ---
 
@@ -160,7 +160,7 @@ pcaps/network_capture.pcapng
 ## Host Information
 
 | System | IP Address |
-|----------|------------|
+|---------|------------|
 | Analyst Machine | 192.168.56.104 |
 | Target Machine | 192.168.56.103 |
 
@@ -234,11 +234,8 @@ The target system exposes numerous services that increase the attack surface.
 SOC-Investigation-Lab/
 │
 ├── docs/
-│   ├── Phase1-Network-Verification.md
-│   ├── Phase2-Reconnaissance.md
-│   ├── Phase3-Traffic-Analysis.md
-│   ├── Phase4-Evidence-Collection.md
-│   └── Findings.md
+│   ├── Findings.md
+│   └── Phase1-Network-Verification.md
 │
 ├── pcaps/
 │   └── network_capture.pcapng
@@ -247,10 +244,10 @@ SOC-Investigation-Lab/
 │   └── final_findings.md
 │
 ├── screenshots/
-│   ├── soc_architecture_diagram.png
-│   ├── ping_test.png
+│   ├── SOC architecture diagram.jpeg
+│   ├── ping_test.jpeg
 │   ├── nmap_scan.png
-│   └── wireshark_capture.png
+│   └── wireshark_capture.jpeg
 │
 └── README.md
 ```
