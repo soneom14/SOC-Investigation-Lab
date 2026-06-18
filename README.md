@@ -12,10 +12,10 @@ The objective was to simulate a real-world SOC analyst environment by performing
 
 ### Environment Overview
 
-| Component | IP Address | Purpose |
-|------------|------------|----------|
-| Kali Linux | 192.168.56.104 | Analyst Machine |
-| Metasploitable2 | 192.168.56.103 | Vulnerable Target |
+| Component                    | IP Address      | Purpose              |
+| ---------------------------- | --------------- | -------------------- |
+| Kali Linux                   | 192.168.56.104  | Analyst Machine      |
+| Metasploitable2              | 192.168.56.103  | Vulnerable Target    |
 | VirtualBox Host-Only Network | 192.168.56.0/24 | Isolated Lab Network |
 
 ### Architecture Diagram
@@ -26,26 +26,26 @@ The objective was to simulate a real-world SOC analyst environment by performing
 
 ## Skills Demonstrated
 
-- Network Verification
-- Network Reconnaissance
-- Nmap Enumeration
-- Packet Capture Analysis
-- Wireshark Traffic Analysis
-- Evidence Collection
-- Security Assessment
-- Incident Documentation
-- Linux Administration
-- Vulnerability Identification
+* Network Verification
+* Network Reconnaissance
+* Nmap Enumeration
+* Packet Capture Analysis
+* Wireshark Traffic Analysis
+* Evidence Collection
+* Security Assessment
+* Incident Documentation
+* Linux Administration
+* Vulnerability Identification
 
 ---
 
 ## Tools Used
 
-- Kali Linux
-- VirtualBox
-- Metasploitable2
-- Nmap
-- Wireshark
+* Kali Linux
+* VirtualBox
+* Metasploitable2
+* Nmap
+* Wireshark
 
 ---
 
@@ -65,9 +65,9 @@ ping 192.168.56.103
 
 ### Results
 
-- Successful ICMP communication
-- 0% packet loss
-- Connectivity confirmed
+* Successful ICMP communication
+* 0% packet loss
+* Connectivity confirmed
 
 ### Screenshot
 
@@ -89,20 +89,20 @@ sudo nmap -sV 192.168.56.103
 
 ### Services Identified
 
-| Port | Service |
-|------|----------|
-| 21 | FTP |
-| 22 | SSH |
-| 23 | Telnet |
-| 25 | SMTP |
-| 53 | DNS |
-| 80 | HTTP |
-| 139 | NetBIOS |
-| 445 | SMB |
-| 3306 | MySQL |
+| Port | Service    |
+| ---- | ---------- |
+| 21   | FTP        |
+| 22   | SSH        |
+| 23   | Telnet     |
+| 25   | SMTP       |
+| 53   | DNS        |
+| 80   | HTTP       |
+| 139  | NetBIOS    |
+| 445  | SMB        |
+| 3306 | MySQL      |
 | 5432 | PostgreSQL |
-| 5900 | VNC |
-| 6667 | IRC |
+| 5900 | VNC        |
+| 6667 | IRC        |
 
 ### Screenshot
 
@@ -122,11 +122,11 @@ Wireshark
 
 ### Observed Traffic
 
-- ICMP Echo Requests and Replies
-- TCP Connection Attempts
-- Service Discovery Traffic
-- SMB Communication
-- NetBIOS Traffic
+* ICMP Echo Requests and Replies
+* TCP Connection Attempts
+* Service Discovery Traffic
+* SMB Communication
+* NetBIOS Traffic
 
 ### Screenshot
 
@@ -142,10 +142,10 @@ Preserve collected evidence for analysis and reporting.
 
 ### Evidence Collected
 
-- Packet Capture File
-- Nmap Scan Results
-- Investigation Screenshots
-- Findings Report
+* Packet Capture File
+* Nmap Scan Results
+* Investigation Screenshots
+* Findings Report
 
 ### Packet Capture
 
@@ -157,74 +157,36 @@ pcaps/network_capture.pcapng
 
 # Investigation Findings
 
-## Host Information
+## Summary
 
-| System | IP Address |
-|---------|------------|
-| Analyst Machine | 192.168.56.104 |
-| Target Machine | 192.168.56.103 |
+The investigation successfully demonstrated a complete SOC workflow including:
 
----
+* Network Verification
+* Service Enumeration
+* Traffic Capture
+* Evidence Collection
+* Security Assessment
+* Incident Documentation
 
-## Security Observations
+### Key Security Findings
 
-### Network Connectivity
-
-- Successful communication established between systems.
-- ICMP traffic observed and validated.
-- No packet loss detected.
-
-### Service Discovery
-
-Multiple services were exposed on the target machine.
-
-### Identified Services
-
-| Service | Risk Level |
-|----------|------------|
-| FTP | Medium |
-| SSH | Low |
-| Telnet | High |
-| SMTP | Medium |
-| DNS | Low |
-| HTTP | Medium |
-| NetBIOS | High |
-| SMB | High |
-| MySQL | Medium |
-| PostgreSQL | Medium |
-| VNC | Medium |
-| IRC | Medium |
+* Multiple services exposed on the target machine.
+* SMB and NetBIOS services increase attack surface.
+* Telnet service transmits data without encryption.
+* Successful traffic capture validated network activity.
+* Evidence preserved through screenshots and packet captures.
 
 ---
 
-## Risk Assessment
+## Documentation
 
-The target system exposes numerous services that increase the attack surface.
-
-### Key Risks
-
-- Unencrypted Telnet communication
-- SMB exposure
-- NetBIOS information disclosure
-- Multiple publicly accessible services
-
-### Potential Impact
-
-- Unauthorized access
-- Credential compromise
-- Information disclosure
-- Lateral movement opportunities
-
----
-
-## Recommendations
-
-1. Disable unnecessary services.
-2. Replace Telnet with SSH.
-3. Restrict SMB access.
-4. Implement firewall controls.
-5. Monitor network traffic continuously.
-6. Conduct routine vulnerability assessments.
+| Document                       | Description                         |
+| ------------------------------ | ----------------------------------- |
+| Findings.md                    | Investigation findings and analysis |
+| Phase1-Network-Verification.md | Connectivity testing                |
+| Phase2-Reconnaissance.md       | Nmap service discovery              |
+| Phase3-Traffic-Analysis.md     | Wireshark analysis                  |
+| Phase4-Evidence-Collection.md  | Evidence preservation               |
 
 ---
 
@@ -235,7 +197,10 @@ SOC-Investigation-Lab/
 │
 ├── docs/
 │   ├── Findings.md
-│   └── Phase1-Network-Verification.md
+│   ├── Phase1-Network-Verification.md
+│   ├── Phase2-Reconnaissance.md
+│   ├── Phase3-Traffic-Analysis.md
+│   └── Phase4-Evidence-Collection.md
 │
 ├── pcaps/
 │   └── network_capture.pcapng
@@ -256,12 +221,12 @@ SOC-Investigation-Lab/
 
 ## Future Improvements
 
-- Nessus Vulnerability Scanning
-- OpenVAS Integration
-- Snort IDS Monitoring
-- Suricata Alert Analysis
-- SIEM Integration
-- Incident Response Playbooks
+* Nessus Vulnerability Scanning
+* OpenVAS Integration
+* Snort IDS Monitoring
+* Suricata Alert Analysis
+* SIEM Integration
+* Incident Response Playbooks
 
 ---
 
@@ -269,7 +234,7 @@ SOC-Investigation-Lab/
 
 **Om Sone**
 
-Cybersecurity Student | SOC Analyst Enthusiast | Network Security Learner
+Computer Science Engineering Student | Cybersecurity Enthusiast | SOC Analyst Aspirant | Network Security Researcher
 
 ---
 
