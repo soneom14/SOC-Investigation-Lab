@@ -1,34 +1,69 @@
-# Findings
+# Final SOC Investigation Findings
+
+## Executive Summary
+
+This Security Operations Center (SOC) investigation was conducted in a controlled VirtualBox laboratory environment using Kali Linux as the analyst workstation and Metasploitable2 as the target system.
+
+The objective of the investigation was to verify network connectivity, enumerate active services, capture network traffic, collect digital evidence, and perform a security assessment. The investigation successfully identified multiple exposed services and demonstrated a complete SOC investigation workflow using industry-standard cybersecurity tools.
+
+---
 
 ## Host Information
 
 | System | IP Address |
 |----------|------------|
-| Analyst Machine (Kali Linux) | 192.168.56.104 |
-| Target Machine (Metasploitable2) | 192.168.56.103 |
+| Kali Linux (Analyst Machine) | 192.168.56.104 |
+| Metasploitable2 (Target Machine) | 192.168.56.103 |
 
 ---
 
 ## Investigation Summary
 
-A Security Operations Center (SOC) investigation was conducted in a controlled laboratory environment to verify connectivity, identify active services, capture network traffic, and document security observations on the target system.
+### Activities Performed
+
+- Network Verification
+- Service Enumeration
+- Traffic Capture and Analysis
+- Evidence Collection
+- Security Assessment
+- Documentation and Reporting
 
 ---
 
-## Observations
+## Network Verification
 
-### Network Connectivity
+### Objective
 
-- Successful ICMP communication observed between analyst and target systems.
-- No packet loss detected during connectivity testing.
-- Target host responded consistently to ping requests.
+Verify connectivity between the analyst machine and target machine.
 
-### Service Discovery Results
+### Result
 
-The Nmap scan identified multiple active services running on the target machine.
+- Successful ICMP communication established.
+- No packet loss observed.
+- Target host responded correctly to ping requests.
+
+### Evidence
+
+![Ping Test](../screenshots/ping_test.jpeg)
+
+---
+
+## Service Enumeration
+
+### Objective
+
+Identify active services running on the target system.
+
+### Command Used
+
+```bash
+sudo nmap -sV 192.168.56.103
+```
+
+### Discovered Services
 
 | Port | Service | Risk Level |
-|--------|----------|------------|
+|------|----------|------------|
 | 21 | FTP | Medium |
 | 22 | SSH | Low |
 | 23 | Telnet | High |
@@ -42,47 +77,73 @@ The Nmap scan identified multiple active services running on the target machine.
 | 5900 | VNC | Medium |
 | 6667 | IRC | Medium |
 
+### Evidence
+
+![Nmap Scan](../screenshots/nmap_scan.png)
+
 ---
 
 ## Traffic Analysis
 
-Network traffic captured in Wireshark revealed:
+### Objective
+
+Capture and analyze network traffic generated during reconnaissance and connectivity testing.
+
+### Tool Used
+
+Wireshark
+
+### Observed Traffic
 
 - ICMP Echo Requests and Replies
-- TCP Handshake Attempts
+- TCP Connection Attempts
+- SMB Communication
+- NetBIOS Traffic
 - Service Discovery Activity
-- SMB and NetBIOS Communications
-- Network Broadcast Traffic
 
-Traffic patterns matched expected reconnaissance behavior performed during the investigation.
+### Evidence
+
+![Wireshark Capture](../screenshots/wireshark_capture.jpeg)
 
 ---
 
 ## Security Assessment
 
-### Identified Risks
+### High-Risk Findings
 
-- Telnet service transmits data in clear text.
-- SMB and NetBIOS services increase attack surface.
-- Multiple exposed services provide additional entry points for attackers.
-- Legacy services present potential security weaknesses.
+- Telnet service enabled on Port 23
+- SMB service exposed on Port 445
+- NetBIOS service exposed on Port 139
 
-### Potential Impact
+### Medium-Risk Findings
 
-If deployed in a production environment, these exposed services could lead to:
+- FTP service accessible on Port 21
+- HTTP service accessible on Port 80
+- Database services exposed (MySQL and PostgreSQL)
+- VNC remote access service detected
+
+### Low-Risk Findings
+
+- SSH service available for secure administration
+- DNS service operational
+
+---
+
+## Potential Security Impact
+
+If deployed in a production environment, these exposed services could increase the attack surface and potentially allow:
 
 - Unauthorized Access
 - Credential Theft
 - Information Disclosure
-- Lateral Movement Opportunities
+- Lateral Movement
+- Service Exploitation
 
 ---
 
 ## Evidence Collected
 
 ### Packet Capture
-
-Location:
 
 ```text
 pcaps/network_capture.pcapng
@@ -91,31 +152,49 @@ pcaps/network_capture.pcapng
 ### Screenshots
 
 - Ping Verification
-- Nmap Service Discovery
+- Nmap Service Enumeration
 - Wireshark Traffic Analysis
-- Network Architecture Diagram
+- SOC Architecture Diagram
 
 ---
 
 ## Recommendations
 
-1. Disable unused services.
+1. Disable unnecessary services.
 2. Replace Telnet with SSH.
-3. Restrict SMB access where unnecessary.
-4. Implement firewall rules to limit exposure.
-5. Continuously monitor network traffic.
+3. Restrict SMB and NetBIOS access.
+4. Apply system security updates.
+5. Implement firewall restrictions.
 6. Conduct regular vulnerability assessments.
+7. Monitor network activity continuously.
+8. Perform periodic security audits.
 
 ---
 
 ## Conclusion
 
-The SOC investigation successfully demonstrated the complete workflow of:
+The investigation successfully demonstrated a complete Security Operations Center (SOC) workflow in a controlled laboratory environment.
 
-- Network Verification
-- Service Enumeration
-- Traffic Analysis
-- Evidence Collection
-- Security Documentation
+The assessment confirmed successful connectivity between systems, identified multiple exposed services, captured and analyzed network traffic, and documented security findings. The project provided practical experience in network reconnaissance, packet analysis, evidence collection, risk assessment, and incident documentation using Kali Linux, Nmap, and Wireshark.
 
-The target machine exposed multiple services that would require monitoring and hardening in a real-world environment. Evidence was successfully captured, analyzed, and documented using Kali Linux, Nmap, and Wireshark.
+---
+
+## Analyst Information
+
+**Analyst:** Om Sone
+
+**Project:** SOC Investigation Lab
+
+**Tools Used:**
+
+- Kali Linux
+- Nmap
+- Wireshark
+- VirtualBox
+- Metasploitable2
+
+---
+
+## Disclaimer
+
+This project was conducted in an isolated laboratory environment using intentionally vulnerable systems for educational and research purposes only.
