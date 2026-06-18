@@ -10,7 +10,7 @@ The objective is to simulate a real-world SOC analyst environment by performing 
 
 ## Lab Architecture
 
-![SOC Architecture](screenshots/soc_architecture_diagram.png)
+![SOC Architecture](screenshots/SOC%20architecture%20diagram.jpeg)
 
 ---
 
@@ -34,7 +34,7 @@ The objective is to simulate a real-world SOC analyst environment by performing 
 
 ---
 
-## Phase 1 – Network Discovery
+## Phase 1 – Network Discovery and Traffic Analysis
 
 ### Connectivity Verification
 
@@ -48,19 +48,22 @@ ping 192.168.56.103
 nmap -sV 192.168.56.103
 ```
 
-### Findings
+### Open Services Identified
 
 | Port | Service |
-|--------|---------|
+|------|---------|
 | 21 | FTP |
 | 22 | SSH |
 | 23 | Telnet |
+| 25 | SMTP |
+| 53 | DNS |
 | 80 | HTTP |
 | 139 | NetBIOS |
 | 445 | SMB |
 | 3306 | MySQL |
 | 5432 | PostgreSQL |
 | 5900 | VNC |
+| 8180 | Apache Tomcat |
 
 ---
 
@@ -70,44 +73,61 @@ nmap -sV 192.168.56.103
 
 Stored in:
 
+```text
 screenshots/
+```
 
 ### Packet Captures
 
 Stored in:
 
+```text
 pcaps/
+```
 
 ### Reports
 
 Stored in:
 
+```text
 reports/
+```
 
 ---
 
 ## Repository Structure
 
-```
+```text
 SOC-Investigation-Lab/
 │
 ├── docs/
 ├── pcaps/
 ├── reports/
 ├── screenshots/
+│   └── SOC architecture diagram.jpeg
 └── README.md
 ```
 
 ---
 
+## Key Findings
+
+- Successful communication established between Kali Linux and Metasploitable 2.
+- ICMP traffic captured and analyzed using Wireshark.
+- Multiple services detected using Nmap version detection.
+- Vulnerable services identified for future assessment.
+- Evidence collected and stored for SOC investigation reporting.
+
+---
+
 ## Conclusion
 
-The lab successfully demonstrated network discovery and packet analysis within a controlled environment. Multiple exposed services were identified on the target machine, providing a foundation for further vulnerability assessment and SOC investigation activities.
+The lab successfully demonstrated network discovery, service enumeration, and packet capture within a controlled VirtualBox environment. The collected evidence forms the foundation for future vulnerability assessment and SOC analysis activities.
 
 ---
 
 ## Author
 
-Om Sone
+**Om Sone**
 
-Cybersecurity Enthusiast | CEH-Aligned Projects | Network Security
+Cybersecurity Enthusiast | CEH-Aligned Projects | Network Security | Vulnerability Assessment
