@@ -1,55 +1,121 @@
-# Final SOC Investigation Findings
+# Findings
 
-## Analyst System
+## Host Information
 
-* Operating System: Kali Linux
-* IP Address: 192.168.56.104
+| System | IP Address |
+|----------|------------|
+| Analyst Machine (Kali Linux) | 192.168.56.104 |
+| Target Machine (Metasploitable2) | 192.168.56.103 |
 
-## Target System
+---
 
-* Operating System: Metasploitable2
-* IP Address: 192.168.56.103
+## Investigation Summary
 
-## Investigation Objective
+A Security Operations Center (SOC) investigation was conducted in a controlled laboratory environment to verify connectivity, identify active services, capture network traffic, and document security observations on the target system.
 
-Perform an end-to-end SOC investigation by identifying active services, capturing network traffic, and documenting security observations within a controlled laboratory environment.
+---
 
-## Reconnaissance Results
+## Observations
 
-Service discovery identified multiple exposed services:
+### Network Connectivity
 
-| Port | Service    | Version          |
-| ---- | ---------- | ---------------- |
-| 21   | FTP        | vsftpd 2.3.4     |
-| 22   | SSH        | OpenSSH 4.7p1    |
-| 23   | Telnet     | Linux telnetd    |
-| 25   | SMTP       | Postfix smtpd    |
-| 53   | DNS        | ISC BIND 9.4.2   |
-| 80   | HTTP       | Apache 2.2.8     |
-| 139  | NetBIOS    | Samba 3.x        |
-| 445  | SMB        | Samba 3.x        |
-| 3306 | MySQL      | MySQL 5.0.51a    |
-| 5432 | PostgreSQL | PostgreSQL 8.3   |
-| 5900 | VNC        | VNC Protocol 3.3 |
-| 6667 | IRC        | UnrealIRCd       |
-| 8180 | HTTP       | Apache Tomcat    |
+- Successful ICMP communication observed between analyst and target systems.
+- No packet loss detected during connectivity testing.
+- Target host responded consistently to ping requests.
+
+### Service Discovery Results
+
+The Nmap scan identified multiple active services running on the target machine.
+
+| Port | Service | Risk Level |
+|--------|----------|------------|
+| 21 | FTP | Medium |
+| 22 | SSH | Low |
+| 23 | Telnet | High |
+| 25 | SMTP | Medium |
+| 53 | DNS | Low |
+| 80 | HTTP | Medium |
+| 139 | NetBIOS | High |
+| 445 | SMB | High |
+| 3306 | MySQL | Medium |
+| 5432 | PostgreSQL | Medium |
+| 5900 | VNC | Medium |
+| 6667 | IRC | Medium |
+
+---
 
 ## Traffic Analysis
 
-Network communication was captured using Wireshark during reconnaissance activities.
+Network traffic captured in Wireshark revealed:
 
-Observed traffic included:
+- ICMP Echo Requests and Replies
+- TCP Handshake Attempts
+- Service Discovery Activity
+- SMB and NetBIOS Communications
+- Network Broadcast Traffic
 
-* ICMP Echo Requests and Replies
-* TCP Connection Attempts
-* TCP Reset Responses
-* Service Discovery Traffic
-* SMB/NetBIOS Announcements
+Traffic patterns matched expected reconnaissance behavior performed during the investigation.
 
-## Risk Assessment
+---
 
-The target system exposes numerous network services which significantly increase the attack surface. Legacy software versions and multiple publicly exposed services represent potential security risks that would require monitoring and hardening in a production environment.
+## Security Assessment
+
+### Identified Risks
+
+- Telnet service transmits data in clear text.
+- SMB and NetBIOS services increase attack surface.
+- Multiple exposed services provide additional entry points for attackers.
+- Legacy services present potential security weaknesses.
+
+### Potential Impact
+
+If deployed in a production environment, these exposed services could lead to:
+
+- Unauthorized Access
+- Credential Theft
+- Information Disclosure
+- Lateral Movement Opportunities
+
+---
+
+## Evidence Collected
+
+### Packet Capture
+
+Location:
+
+```text
+pcaps/network_capture.pcapng
+```
+
+### Screenshots
+
+- Ping Verification
+- Nmap Service Discovery
+- Wireshark Traffic Analysis
+- Network Architecture Diagram
+
+---
+
+## Recommendations
+
+1. Disable unused services.
+2. Replace Telnet with SSH.
+3. Restrict SMB access where unnecessary.
+4. Implement firewall rules to limit exposure.
+5. Continuously monitor network traffic.
+6. Conduct regular vulnerability assessments.
+
+---
 
 ## Conclusion
 
-The investigation successfully demonstrated the SOC workflow of reconnaissance, evidence collection, packet analysis, and incident documentation using open-source cybersecurity tools.
+The SOC investigation successfully demonstrated the complete workflow of:
+
+- Network Verification
+- Service Enumeration
+- Traffic Analysis
+- Evidence Collection
+- Security Documentation
+
+The target machine exposed multiple services that would require monitoring and hardening in a real-world environment. Evidence was successfully captured, analyzed, and documented using Kali Linux, Nmap, and Wireshark.
