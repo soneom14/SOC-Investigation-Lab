@@ -4,7 +4,7 @@
 
 This project demonstrates a Security Operations Center (SOC) investigation workflow using Kali Linux, Metasploitable2, Nmap, Wireshark, and VirtualBox.
 
-The objective is to simulate a real-world SOC analyst environment by performing network discovery, traffic analysis, evidence collection, and vulnerability assessment in a controlled lab environment.
+The objective was to simulate a real-world SOC analyst environment by performing network verification, service discovery, traffic analysis, evidence collection, and security assessment within a controlled laboratory environment.
 
 ---
 
@@ -13,14 +13,29 @@ The objective is to simulate a real-world SOC analyst environment by performing 
 ### Environment Overview
 
 | Component | IP Address | Purpose |
-|------------|------------|------------|
+|------------|------------|----------|
 | Kali Linux | 192.168.56.104 | Analyst Machine |
 | Metasploitable2 | 192.168.56.103 | Vulnerable Target |
 | VirtualBox Host-Only Network | 192.168.56.0/24 | Isolated Lab Network |
 
 ### Architecture Diagram
 
-![SOC Architecture Diagram](screenshots/SOC%20architecture%20diagram.jpeg)
+![SOC Architecture Diagram](screenshots/soc_architecture_diagram.png)
+
+---
+
+## Skills Demonstrated
+
+- Network Verification
+- Network Reconnaissance
+- Nmap Enumeration
+- Packet Capture Analysis
+- Wireshark Traffic Analysis
+- Evidence Collection
+- Security Assessment
+- Incident Documentation
+- Linux Administration
+- Vulnerability Identification
 
 ---
 
@@ -34,46 +49,48 @@ The objective is to simulate a real-world SOC analyst environment by performing 
 
 ---
 
-## Network Verification
+# Investigation Workflow
 
-The first phase of the investigation was to verify connectivity between the analyst machine and the target system.
+## Phase 1 – Network Verification
 
-### Ping Test
+### Objective
 
-Command:
+Verify connectivity between the analyst machine and the target machine.
+
+### Command
 
 ```bash
 ping 192.168.56.103
 ```
 
-Result:
+### Results
 
 - Successful ICMP communication
 - 0% packet loss
 - Connectivity confirmed
 
-Screenshot:
+### Screenshot
 
-![Ping Test](screenshots/ping_test.jpeg)
+![Ping Test](screenshots/ping_test.png)
 
 ---
 
-## Reconnaissance
+## Phase 2 – Reconnaissance
 
-Service discovery was performed using Nmap.
+### Objective
 
-### Nmap Scan
+Identify active services running on the target system.
 
-Command:
+### Command
 
 ```bash
-nmap -sV 192.168.56.103
+sudo nmap -sV 192.168.56.103
 ```
 
-Key Services Identified:
+### Services Identified
 
 | Port | Service |
-|------|---------|
+|--------|----------|
 | 21 | FTP |
 | 22 | SSH |
 | 23 | Telnet |
@@ -85,36 +102,52 @@ Key Services Identified:
 | 3306 | MySQL |
 | 5432 | PostgreSQL |
 | 5900 | VNC |
-| 8180 | Apache Tomcat |
+| 6667 | IRC |
 
-Screenshot:
+### Screenshot
 
 ![Nmap Scan](screenshots/nmap_scan.png)
 
 ---
 
-## Traffic Analysis
+## Phase 3 – Traffic Analysis
 
-Network traffic was captured using Wireshark during reconnaissance and connectivity testing.
+### Objective
 
-Observed Traffic:
+Capture and analyze network traffic generated during reconnaissance activities.
+
+### Tool
+
+Wireshark
+
+### Observed Traffic
 
 - ICMP Echo Requests and Replies
 - TCP Connection Attempts
-- SMB Broadcast Traffic
-- NetBIOS Name Service Traffic
+- Service Discovery Traffic
+- SMB Communication
+- NetBIOS Traffic
 
-Screenshot:
+### Screenshot
 
-![Wireshark Capture](screenshots/wireshark_capture.jpeg)
+![Wireshark Capture](screenshots/wireshark_capture.png)
 
 ---
 
-## Evidence Collection
+## Phase 4 – Evidence Collection
 
-Packet captures were collected and preserved for analysis.
+### Objective
 
-Location:
+Preserve collected evidence for analysis and reporting.
+
+### Evidence Collected
+
+- Packet Capture File
+- Nmap Scan Results
+- Investigation Screenshots
+- Findings Report
+
+### Packet Capture
 
 ```text
 pcaps/network_capture.pcapng
@@ -122,41 +155,76 @@ pcaps/network_capture.pcapng
 
 ---
 
-## Findings
+# Investigation Findings
 
-- Network connectivity successfully established.
-- Multiple services exposed by the target system.
-- Clear-text protocols such as Telnet detected.
-- SMB and NetBIOS services accessible.
-- Several outdated services identified.
-- Network traffic successfully captured and preserved.
+## Host Information
+
+| System | IP Address |
+|----------|------------|
+| Analyst Machine | 192.168.56.104 |
+| Target Machine | 192.168.56.103 |
+
+---
+
+## Security Observations
+
+### Network Connectivity
+
+- Successful communication established between systems.
+- ICMP traffic observed and validated.
+- No packet loss detected.
+
+### Service Discovery
+
+Multiple services were exposed on the target machine.
+
+### Identified Services
+
+| Service | Risk Level |
+|----------|------------|
+| FTP | Medium |
+| SSH | Low |
+| Telnet | High |
+| SMTP | Medium |
+| DNS | Low |
+| HTTP | Medium |
+| NetBIOS | High |
+| SMB | High |
+| MySQL | Medium |
+| PostgreSQL | Medium |
+| VNC | Medium |
+| IRC | Medium |
 
 ---
 
 ## Risk Assessment
 
-The target environment contains intentionally vulnerable services designed for security testing.
+The target system exposes numerous services that increase the attack surface.
 
-Potential Risks:
+### Key Risks
 
-- Unauthorized access through exposed services.
-- Information disclosure.
-- Weak authentication mechanisms.
-- Exploitable legacy software.
+- Unencrypted Telnet communication
+- SMB exposure
+- NetBIOS information disclosure
+- Multiple publicly accessible services
+
+### Potential Impact
+
+- Unauthorized access
+- Credential compromise
+- Information disclosure
+- Lateral movement opportunities
 
 ---
 
-## Conclusion
+## Recommendations
 
-This investigation successfully demonstrated the SOC workflow of:
-
-- Network Verification
-- Service Enumeration
-- Traffic Capture
-- Evidence Collection
-- Documentation and Reporting
-
-The project provides hands-on experience with common SOC analyst activities using open-source cybersecurity tools.
+1. Disable unnecessary services.
+2. Replace Telnet with SSH.
+3. Restrict SMB access.
+4. Implement firewall controls.
+5. Monitor network traffic continuously.
+6. Conduct routine vulnerability assessments.
 
 ---
 
@@ -166,7 +234,11 @@ The project provides hands-on experience with common SOC analyst activities usin
 SOC-Investigation-Lab/
 │
 ├── docs/
-│   └── Phase1-Network-Verification.md
+│   ├── Phase1-Network-Verification.md
+│   ├── Phase2-Reconnaissance.md
+│   ├── Phase3-Traffic-Analysis.md
+│   ├── Phase4-Evidence-Collection.md
+│   └── Findings.md
 │
 ├── pcaps/
 │   └── network_capture.pcapng
@@ -175,13 +247,24 @@ SOC-Investigation-Lab/
 │   └── final_findings.md
 │
 ├── screenshots/
-│   ├── SOC architecture diagram.jpeg
+│   ├── soc_architecture_diagram.png
+│   ├── ping_test.png
 │   ├── nmap_scan.png
-│   ├── ping_test.jpeg
-│   └── wireshark_capture.jpeg
+│   └── wireshark_capture.png
 │
 └── README.md
 ```
+
+---
+
+## Future Improvements
+
+- Nessus Vulnerability Scanning
+- OpenVAS Integration
+- Snort IDS Monitoring
+- Suricata Alert Analysis
+- SIEM Integration
+- Incident Response Playbooks
 
 ---
 
@@ -189,4 +272,10 @@ SOC-Investigation-Lab/
 
 **Om Sone**
 
-SOC Investigation Lab Project using Kali Linux, Nmap, Wireshark, and Metasploitable2.
+Cybersecurity Student | SOC Analyst Enthusiast | Network Security Learner
+
+---
+
+## Disclaimer
+
+This project was conducted in an isolated laboratory environment using intentionally vulnerable systems for educational and research purposes only.
