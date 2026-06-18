@@ -178,7 +178,26 @@ The investigation successfully demonstrated a complete Security Operations Cente
 The assessment confirmed successful connectivity between systems, identified multiple exposed services, captured and analyzed network traffic, and documented security findings. The project provided practical experience in network reconnaissance, packet analysis, evidence collection, risk assessment, and incident documentation using Kali Linux, Nmap, and Wireshark.
 
 ---
+## Key Findings Summary
 
+✅ Network connectivity successfully verified
+
+✅ 12 active services identified on the target system
+
+✅ High-risk services detected:
+- Telnet (Port 23)
+- SMB (Port 445)
+- NetBIOS (Port 139)
+
+✅ Network traffic captured and analyzed using Wireshark
+
+✅ Evidence preserved through screenshots and packet capture files
+
+✅ Security risks assessed and documented
+
+✅ Recommendations provided for remediation and hardening
+
+---
 ## Analyst Information
 
 **Analyst:** Om Sone
