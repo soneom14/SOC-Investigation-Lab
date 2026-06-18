@@ -20,7 +20,7 @@ The objective was to simulate a real-world SOC analyst environment by performing
 
 ### Architecture Diagram
 
-![SOC Architecture Diagram](screenshots/SOC%20architecture%20diagram.jpeg)
+![SOC Architecture Diagram](./screenshots/SOC%20architecture%20diagram.jpeg)
 
 ---
 
@@ -71,7 +71,7 @@ ping 192.168.56.103
 
 ### Screenshot
 
-![Ping Test](screenshots/ping_test.jpeg)
+![Ping Test](./screenshots/ping_test.jpeg)
 
 ---
 
@@ -106,7 +106,7 @@ sudo nmap -sV 192.168.56.103
 
 ### Screenshot
 
-![Nmap Scan](screenshots/nmap_scan.png)
+![Nmap Scan](./screenshots/nmap_scan.png)
 
 ---
 
@@ -130,7 +130,7 @@ Wireshark
 
 ### Screenshot
 
-![Wireshark Capture](screenshots/wireshark_capture.jpeg)
+![Wireshark Capture](./screenshots/wireshark_capture.jpeg)
 
 ---
 
